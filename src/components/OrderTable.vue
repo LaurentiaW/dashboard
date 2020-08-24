@@ -2,37 +2,35 @@
   <table>
     <thead>
       <tr>
-        <th>shipment date</th>
-        <th>category</th>
+        <th>id</th>
+        <th>timestamp</th>
+        <th>erpOrderRef</th>
+        <th>order nr</th>
         <th>collection</th>
-        <th>group</th>
-        <th>description</th>
-        <th>colorCode</th>
-        <th>gender</th>
         <th>season</th>
-        <th>size</th>
-        <th>size alt</th>
-        <th>type</th>
-        <th>quantity</th>
-        <th>currency</th>
-        <th>total</th>
+        <th>customer nr</th>
+        <th>sales rep</th>
       </tr>
     </thead>
     <tbody>
-      <OrderRow v-for="(product, i) in products" :key="i" :product="product" />
+      <tr v-for="order in orders" :key="order.id">
+        <td>{{ order.id }}</td>
+        <td>{{ order.timestamp }}</td>
+        <td>{{ order.erpOrderReference }}</td>
+        <td>{{ order.orderNumber }}</td>
+        <td>{{ order.collection }}</td>
+        <td>{{ order.season }}</td>
+        <td>{{ order.customerNo }}</td>
+        <td>{{ order.salesPerson }}</td>
+      </tr>
     </tbody>
-    <tfoot></tfoot>
   </table>
 </template>
 
 <script>
-import OrderRow from "@/components/OrderRow.vue";
 export default {
-  components: {
-    OrderRow,
-  },
   props: {
-    products: Array,
+    orders: Array,
   },
 };
 </script>

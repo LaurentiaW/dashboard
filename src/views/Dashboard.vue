@@ -21,43 +21,21 @@
         <tr></tr>
       </tbody>
     </table> -->
-    {{ salesOrder }}
-    <table>
-      <thead>
-        <tr>
-          <th>id</th>
-          <th>timestamp</th>
-          <th>erpOrderRef</th>
-          <th>order nr</th>
-          <th>collection</th>
-          <th>season</th>
-          <th>customer nr</th>
-          <th>sales rep</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="row in rows" :key="row.id">
-          <td>{{ row.id }}</td>
-          <td>{{ row.timestamp }}</td>
-          <td>{{ row.erpOrderReference }}</td>
-          <td>{{ row.orderNumber }}</td>
-          <td>{{ row.collection }}</td>
-          <td>{{ row.season }}</td>
-          <td>{{ row.customerNo }}</td>
-          <td>{{ row.salesPerson }}</td>
-        </tr>
-      </tbody>
-    </table>
+    <!-- {{ salesOrder }} -->
+    <OrderTable :orders="orders" />
 
-    <OrderTable
-      v-for="(order, key) in orders"
-      :key="key"
-      :products="order.products"
+    <!-- {{ lines }} -->
+
+    <OrderLinesTable
+      v-for="i in lines"
+      :key="i.orderline"
+      :products="i.products"
     />
   </div>
 </template>
 
 <script>
+import OrderLinesTable from "@/components/OrderLinesTable.vue";
 import OrderTable from "@/components/OrderTable.vue";
 // import axios from "axios";
 import OrderLines from "@/services/OrderLines.js";
@@ -65,20 +43,21 @@ import Orders from "@/services/Orders.js";
 
 export default {
   components: {
+    OrderLinesTable,
     OrderTable,
   },
   data() {
     return {
       orders: [],
-      rows: [],
+      lines: [],
     };
   },
   computed: {
     salesOrder() {
       let map = {};
       this.orders.forEach((order) => (map[order.id] = false));
-      this.rows.forEach(
-        (row) => map[row.orderline] === false && (map[row.orderline] = true)
+      this.lines.forEach(
+        (line) => map[line.orderline] === false && (map[line.orderline] = true)
       );
       return Object.keys(map).map((k) => ({
         name: k,
@@ -93,7 +72,7 @@ export default {
   created() {
     Orders.getEvents()
       .then((response) => {
-        this.rows = response.data;
+        this.orders = response.data;
         console.log(response.data);
       })
       .catch((error) => {
@@ -102,7 +81,7 @@ export default {
 
     OrderLines.getEvents()
       .then((response) => {
-        this.orders = response.data;
+        this.lines = response.data;
         console.log(response.data);
       })
       .catch((error) => {
