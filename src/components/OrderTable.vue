@@ -31,6 +31,12 @@
 export default {
   props: {
     orders: Array,
+    lines: Array,
+  },
+  computed: {
+    salesLines(id) {
+      return this.lines.filter((line) => line.orderline === id);
+    },
   },
 };
 </script>
