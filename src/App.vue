@@ -53,7 +53,7 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <v-content>
+    <v-main>
       <v-container class="px-4 py-0 fill-height" fluid>
         <v-row class="fill-height">
           <v-col>
@@ -63,16 +63,11 @@
           </v-col>
         </v-row>
       </v-container>
-    </v-content>
-    <v-footer class="py-3">
-      <span class="ml-auto overline">Iatek &copy;2020</span>
-    </v-footer>
+    </v-main>
   </v-app>
 </template>
 
 <script>
-// import HelloWorld from "./components/HelloWorld";
-
 export default {
   name: "App",
 
@@ -89,15 +84,7 @@ export default {
     toggleMini: true,
     items: [
       { title: "Home", href: "/", icon: "mdi-home-outline" },
-      { title: "Detections", href: "/detections", icon: "mdi-shield-account" },
-      { title: "Components", href: "/comp", icon: "mdi-palette-swatch" },
-      {
-        title: "Customers",
-        href: "/customers",
-        icon: "mdi-account-search-outline",
-      },
-      { title: "Orders", href: "/orders", icon: "mdi-bus-clock" },
-      { title: "Settings", href: "/settings", icon: "mdi-settings-outline" },
+      { title: "Orders", href: "/order/1", icon: "mdi-palette-swatch" },
     ],
   }),
   methods: {
@@ -107,3 +94,18 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+.height-full {
+  height: 100%;
+}
+
+.absolute {
+  position: absolute;
+}
+.centre {
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+</style>

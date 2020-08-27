@@ -1,25 +1,21 @@
 <template>
-  <div>
-    <v-card>
-      <div class="primary fill-height">&nbsp;</div>
-      <div class="col pa-3 py-4 primary--text">
-        <h5 class="text-truncate">Customer's Monthly Orders</h5>
-      </div>
-      <v-data-table
-        :headers="headers"
-        :items="monthlySales"
-        :items-per-page="5"
-        class="elevation-1"
-        hide-default-footer
-      ></v-data-table>
-      <v-data-table
-        :headers="headers"
-        :items="tableTotals"
-        class="elevation-1 hide-header"
-        hide-default-footer
-      ></v-data-table>
-    </v-card>
-  </div>
+  <v-card>
+    <div class="primary fill-height">&nbsp;</div>
+    <div class="col pa-3 py-4 primary--text">
+      <h5 class="text-truncate">Customer's Monthly Orders</h5>
+    </div>
+    <v-data-table
+      :headers="headers"
+      :items="monthlySales"
+      :items-per-page="5"
+      class="elevation-1"
+    ></v-data-table>
+    <!-- <v-data-table
+      :headers="headers"
+      :items="tableTotals"
+      class="elevation-1 hide-header"
+    ></v-data-table> -->
+  </v-card>
 </template>
 
 <script>
@@ -31,18 +27,23 @@ export default {
           text: "Month",
           align: "start",
           sortable: true,
-          value: "month",
+          value: "timestamp",
         },
-        { text: "Value of Orders", value: "amount", align: "center" },
-        { text: "Nr of orders", value: "count", align: "center" },
+        { text: "Value of Orders", value: "total", align: "center" },
+        // { text: "Nr of orders", value: "count", align: "center" },
       ],
-      monthlySales: [
-        { month: "Jan", count: 5, amount: "$94" },
-        { month: "Feb", count: 4, amount: "$102" },
-        { month: "Mar", count: 2, amount: "$85" },
-      ],
-      tableTotals: [{ month: "Total", count: 11, amount: "$281" }],
+      // monthlySales: [
+      //   { month: "Jan", count: 5, amount: "$94" },
+      //   { month: "Feb", count: 4, amount: "$102" },
+      //   { month: "Mar", count: 2, amount: "$85" },
+      // ],
+      // tableTotals: [{ month: "Total", count: 11, amount: "$281" }],
     };
+  },
+  props: {
+    monthlySales: {
+      type: Array,
+    },
   },
 };
 </script>
